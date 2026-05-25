@@ -66,7 +66,7 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col lg:h-screen">
       <PageHeader
         numeral="§ I."
         title="Users"
@@ -77,17 +77,17 @@ export default function AdminUsersPage() {
               e.preventDefault();
               load(q);
             }}
-            className="flex gap-2"
+            className="flex gap-2 w-full md:w-auto"
           >
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search email or name…"
-              className="h-9 w-[260px] bg-surface text-ink border border-rule rounded-md px-3 text-[13px] focus-ring"
+              className="h-9 flex-1 md:w-[260px] bg-surface text-ink border border-rule rounded-md px-3 text-[13px] focus-ring"
             />
             <button
               type="submit"
-              className="h-9 px-3.5 text-[13px] font-medium rounded-md border border-rule-2 text-ink-2 hover:border-mute hover:text-ink"
+              className="h-9 px-3.5 text-[13px] font-medium rounded-md border border-rule-2 text-ink-2 hover:border-mute hover:text-ink shrink-0"
             >
               Search
             </button>
@@ -96,8 +96,8 @@ export default function AdminUsersPage() {
       />
 
       <div className="grid grid-cols-12 flex-1 min-h-0">
-        {/* List */}
-        <aside className="col-span-12 lg:col-span-5 border-r border-rule overflow-y-auto bg-paper-2/40">
+        {/* List — full width on mobile (stacks above detail), left rail on lg+ */}
+        <aside className="col-span-12 lg:col-span-5 border-b lg:border-b-0 lg:border-r border-rule lg:overflow-y-auto bg-paper-2/40">
           {users === null ? (
             <div className="px-5 py-6 serif-italic text-mute">Loading…</div>
           ) : users.length === 0 ? (
@@ -158,7 +158,7 @@ export default function AdminUsersPage() {
         </aside>
 
         {/* Detail */}
-        <main className="col-span-12 lg:col-span-7 overflow-y-auto">
+        <main className="col-span-12 lg:col-span-7 lg:overflow-y-auto">
           {!selectedId ? (
             <div className="h-full flex items-center justify-center">
               <p className="serif-italic text-mute">Pick a user on the left.</p>
@@ -197,11 +197,11 @@ function UserDetail({
   const activeSub = detail.subscriptions.find((s) => s.status === 'active');
 
   return (
-    <div className="px-7 py-6 space-y-6">
-      <header className="flex items-start justify-between gap-4 flex-wrap">
-        <div>
+    <div className="px-4 sm:px-6 md:px-7 py-5 md:py-6 space-y-5 md:space-y-6">
+      <header className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+        <div className="min-w-0">
           <h2
-            className="font-display text-[26px] tracking-[-0.012em] text-ink"
+            className="font-display text-[22px] md:text-[26px] tracking-[-0.012em] text-ink"
             style={{ fontWeight: 450 }}
           >
             {u.name}

@@ -12,25 +12,29 @@ export function PageHeader({
   actions?: React.ReactNode;
 }) {
   return (
-    <div className="border-b border-rule px-8 py-6 flex items-end justify-between gap-6 flex-wrap">
-      <div>
+    <div className="border-b border-rule px-4 sm:px-6 md:px-8 py-4 md:py-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6">
+      <div className="min-w-0">
         <div className="flex items-baseline gap-3 mb-1">
           <span className="section-numeral">{numeral}</span>
           <span className="eyebrow">Admin</span>
         </div>
         <h1
-          className="font-display text-[28px] leading-[1.1] tracking-[-0.012em] text-ink"
+          className="font-display text-[22px] sm:text-[26px] md:text-[28px] leading-[1.1] tracking-[-0.012em] text-ink"
           style={{ fontWeight: 450 }}
         >
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-1.5 text-[13.5px] text-mute max-w-[60ch]">
+          <p className="mt-1.5 text-[13px] md:text-[13.5px] text-mute max-w-[60ch]">
             {subtitle}
           </p>
         )}
       </div>
-      {actions && <div className="flex items-center gap-2">{actions}</div>}
+      {actions && (
+        <div className="flex items-center gap-2 flex-wrap md:flex-nowrap md:shrink-0">
+          {actions}
+        </div>
+      )}
     </div>
   );
 }

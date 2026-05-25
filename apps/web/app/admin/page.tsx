@@ -20,7 +20,7 @@ export default function AdminDashboardPage() {
     <div>
       <PageHeader numeral="§" title="Overview" subtitle="At-a-glance signals across users, payments, and content." />
 
-      <div className="px-8 py-7">
+      <div className="px-4 sm:px-6 md:px-8 py-5 md:py-7">
         {/* Stats grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-rule border border-rule rounded-lg overflow-hidden">
           <StatBlock label="Users" value={stats?.users.total ?? ', '} foot={stats ? `${stats.users.admins} admin` : ''} />
@@ -32,7 +32,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Recent rows */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6 mt-6 md:mt-8">
           <Card title="Recent users" actions={<Link href="/admin/users" className="text-[12.5px] text-mute hover:text-ink">View all →</Link>}>
             {users.length === 0 ? (
               <Empty>No users yet.</Empty>

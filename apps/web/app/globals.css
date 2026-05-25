@@ -235,7 +235,8 @@ button { font-family: inherit; }
   border: 1px solid var(--color-rule-2);
   border-radius: 8px;
   box-shadow: 0 12px 32px rgba(20, 18, 14, 0.16), 0 4px 12px rgba(20, 18, 14, 0.08);
-  width: 320px;
+  /* On mobile, never exceed the viewport (leave 16px breathing room each side). */
+  width: min(320px, calc(100vw - 32px));
   overflow: hidden;
   font-family: var(--font-body), sans-serif;
   color: var(--color-ink);

@@ -44,7 +44,7 @@ export default function AdminPaymentsPage() {
       />
 
       {/* ---------- Financial widgets ---------- */}
-      <div className="px-8 pt-7">
+      <div className="px-4 sm:px-6 md:px-8 pt-5 md:pt-7">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <BigWidget
             label="Total revenue"
@@ -141,7 +141,7 @@ export default function AdminPaymentsPage() {
       </div>
 
       {/* ---------- Filter chips + total ---------- */}
-      <div className="px-8 py-4 border-y border-rule flex items-center justify-between flex-wrap gap-3 mt-7">
+      <div className="px-4 sm:px-6 md:px-8 py-4 border-y border-rule flex items-center justify-between flex-wrap gap-3 mt-7">
         <div className="flex flex-wrap gap-1.5">
           {FILTERS.map((f) => (
             <button
@@ -167,7 +167,7 @@ export default function AdminPaymentsPage() {
       </div>
 
       {/* ---------- Table ---------- */}
-      <div className="px-8 py-7">
+      <div className="px-4 sm:px-6 md:px-8 py-5 md:py-7">
         {txs === null ? (
           <p className="serif-italic text-mute">Loading…</p>
         ) : txs.length === 0 ? (
@@ -175,8 +175,8 @@ export default function AdminPaymentsPage() {
             <Empty>No transactions match.</Empty>
           </div>
         ) : (
-          <div className="bg-surface border border-rule rounded-lg overflow-hidden">
-            <table className="w-full text-[13px]">
+          <div className="bg-surface border border-rule rounded-lg overflow-x-auto">
+            <table className="w-full text-[13px] min-w-[760px]">
               <thead className="bg-paper-2 border-b border-rule">
                 <tr>
                   <Th>Order ID</Th>

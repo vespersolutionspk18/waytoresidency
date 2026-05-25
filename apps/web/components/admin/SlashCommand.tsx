@@ -182,7 +182,15 @@ export const SlashCommand = Extension.create({
             }
             popup.style.display = 'block';
             popup.style.position = 'absolute';
-            popup.style.left = `${window.scrollX + r.left}px`;
+
+            // Clamp horizontally so the popup never spills outside the viewport
+            // on phones — `.slash-popup` width is min(320, vw-32).
+            const popupWidth = popup.offsetWidth || 320;
+            const desiredLeft = r.left;
+            const maxLeft = window.innerWidth - popupWidth - 8;
+            const clampedLeft = Math.max(8, Math.min(desiredLeft, maxLeft));
+            popup.style.left = `${window.scrollX + clampedLeft}px`;
+
             const popupHeight = popup.offsetHeight || 320;
             const overflowsBottom = r.bottom + popupHeight + 8 > window.innerHeight;
             popup.style.top = overflowsBottom

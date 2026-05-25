@@ -13,6 +13,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const [me, setMe] = useState<{ name: string; email: string } | null>(null);
   const [denied, setDenied] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     adminApi
@@ -23,6 +24,31 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         else setDenied(true);
       });
   }, [router]);
+
+  // Close drawer when route changes (mobile nav UX)
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, [pathname]);
+
+  // Close drawer on Escape
+  useEffect(() => {
+    if (!drawerOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setDrawerOpen(false);
+    }
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [drawerOpen]);
+
+  // Lock body scroll while the drawer is open
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [drawerOpen]);
 
   if (denied) {
     return (
@@ -58,12 +84,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="min-h-screen flex bg-paper">
-      <aside className="w-[240px] shrink-0 border-r border-rule bg-paper-2 flex flex-col">
-        <Link
-          href="/admin"
-          className="px-5 py-5 border-b border-rule flex items-center gap-2.5"
-        >
+    <div className="min-h-screen bg-paper lg:flex">
+      {/* ---------- Mobile top bar (hamburger + brand) ---------- */}
+      <div className="lg:hidden sticky top-0 z-30 bg-paper-2/95 backdrop-blur border-b border-rule h-14 px-3 flex items-center justify-between">
+        <Link href="/admin" className="flex items-center gap-2.5 px-2 py-1">
           <LogoMark className="w-5 h-5 text-ink" />
           <span
             className="font-display text-[16px] text-ink tracking-tight"
@@ -72,6 +96,55 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             admin<span className="text-copper">.</span>
           </span>
         </Link>
+        <button
+          type="button"
+          onClick={() => setDrawerOpen(true)}
+          aria-label="Open admin menu"
+          className="h-10 w-10 inline-flex items-center justify-center rounded-md text-ink-2 hover:text-ink hover:bg-paper"
+        >
+          <HamburgerIcon />
+        </button>
+      </div>
+
+      {/* ---------- Backdrop (mobile only, when drawer open) ---------- */}
+      {drawerOpen && (
+        <div
+          onClick={() => setDrawerOpen(false)}
+          className="lg:hidden fixed inset-0 z-40 bg-ink/40 backdrop-blur-[1px]"
+          aria-hidden
+        />
+      )}
+
+      {/* ---------- Sidebar / Drawer ---------- */}
+      <aside
+        className={cn(
+          // Desktop: fixed sidebar, always visible
+          'lg:relative lg:w-[240px] lg:shrink-0 lg:translate-x-0 lg:flex',
+          // Mobile: off-canvas drawer
+          'fixed inset-y-0 left-0 z-50 w-[280px] flex flex-col bg-paper-2 border-r border-rule transform transition-transform duration-200 ease-out',
+          drawerOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
+        )}
+      >
+        <div className="px-5 py-5 border-b border-rule flex items-center justify-between">
+          <Link href="/admin" className="flex items-center gap-2.5">
+            <LogoMark className="w-5 h-5 text-ink" />
+            <span
+              className="font-display text-[16px] text-ink tracking-tight"
+              style={{ fontWeight: 500 }}
+            >
+              admin<span className="text-copper">.</span>
+            </span>
+          </Link>
+          {/* Close button — mobile only */}
+          <button
+            type="button"
+            onClick={() => setDrawerOpen(false)}
+            aria-label="Close menu"
+            className="lg:hidden h-8 w-8 inline-flex items-center justify-center rounded text-mute hover:text-ink"
+          >
+            <CloseIcon />
+          </button>
+        </div>
 
         <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-5">
           <NavSection title="Overview">
@@ -169,5 +242,21 @@ function NavItem({
     >
       {children}
     </Link>
+  );
+}
+
+function HamburgerIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
+      <path d="M2 5h14M2 9h14M2 13h14" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
+      <path d="M3 3l8 8M11 3l-8 8" />
+    </svg>
   );
 }

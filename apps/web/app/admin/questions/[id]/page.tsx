@@ -163,7 +163,7 @@ export default function AdminEditQuestionPage({
         }
       />
 
-      <div className="px-8 py-7 space-y-6 max-w-[1100px]">
+      <div className="px-4 sm:px-6 md:px-8 py-5 md:py-7 space-y-5 md:space-y-6 max-w-[1100px]">
         {error && (
           <div className="border border-wrong/40 bg-[#f5e7e4] text-wrong text-[13px] rounded-md px-3.5 py-2.5">
             {error}
@@ -190,7 +190,7 @@ export default function AdminEditQuestionPage({
                 minHeight={320}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <label className="flex flex-col gap-1.5">
                 <span className="eyebrow">Difficulty</span>
                 <select

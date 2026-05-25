@@ -266,7 +266,7 @@ export function AttemptRuntime({ attemptId }: Props) {
   const answeredCount = attempt.questions.filter((qq) => qq.answeredAt).length;
 
   return (
-    <div className="mx-auto max-w-[1320px] px-4 md:px-8 py-8">
+    <div className="mx-auto max-w-[1320px] px-3 sm:px-4 md:px-8 py-5 md:py-8">
       {/* ---------- Top bar ---------- */}
       <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
         <div className="flex items-baseline gap-3">
@@ -302,10 +302,10 @@ export function AttemptRuntime({ attemptId }: Props) {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-12 gap-4 md:gap-6">
         {/* ---------- LEFT: question + options + actions ---------- */}
         <article className="col-span-12 lg:col-span-7 bg-surface border border-rule rounded-lg overflow-hidden h-fit">
-          <header className="px-7 py-3 border-b border-rule bg-paper-2 flex items-center justify-between text-[12.5px]">
+          <header className="px-4 sm:px-7 py-3 border-b border-rule bg-paper-2 flex items-center justify-between text-[12.5px] gap-3">
             <div className="flex items-center gap-3">
               <span className="section-numeral">No. {index + 1}</span>
               <span className="text-mute">{q.subject?.name ?? 'Mixed'}</span>
@@ -324,7 +324,7 @@ export function AttemptRuntime({ attemptId }: Props) {
             </button>
           </header>
 
-          <div className="px-7 py-7 md:px-9 md:py-8">
+          <div className="px-4 sm:px-7 py-5 sm:py-7 md:px-9 md:py-8">
             <p className="text-[16px] text-ink-2 leading-[1.7] whitespace-pre-line">
               {q.vignette}
             </p>
@@ -451,8 +451,8 @@ export function AttemptRuntime({ attemptId }: Props) {
         </article>
 
         {/* ---------- RIGHT: map + explanation (or placeholder) ---------- */}
-        <aside className="col-span-12 lg:col-span-5 flex flex-col gap-5">
-          <div className="bg-surface border border-rule rounded-lg p-5">
+        <aside className="col-span-12 lg:col-span-5 flex flex-col gap-4 md:gap-5">
+          <div className="bg-surface border border-rule rounded-lg p-4 sm:p-5">
             <div className="flex items-center justify-between mb-3">
               <span className="eyebrow">Session map</span>
               <span className="text-[11.5px] text-mute">
@@ -480,7 +480,7 @@ export function AttemptRuntime({ attemptId }: Props) {
           {isTutor && isRevealed && q.explanation ? (
             <div
               ref={explanationRef}
-              className="bg-surface border border-rule rounded-lg p-6 rise"
+              className="bg-surface border border-rule rounded-lg p-4 sm:p-6 rise"
             >
               <div className="flex items-baseline justify-between mb-3 pb-2 border-b border-rule">
                 <span className="eyebrow">Explanation</span>

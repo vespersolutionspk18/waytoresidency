@@ -67,7 +67,7 @@ export default function AdminContentPage() {
   );
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col lg:h-screen">
       <PageHeader
         numeral="§"
         title="Content"
@@ -300,7 +300,13 @@ function Column({
   wide?: boolean;
 }) {
   return (
-    <div className={cn('flex flex-col min-h-0 border-r border-rule last:border-r-0', wide ? 'col-span-6' : 'col-span-3')}>
+    <div className={cn(
+      'flex flex-col min-h-0 border-b lg:border-b-0 lg:border-r border-rule lg:last:border-r-0',
+      // Mobile: each column gets full width and caps at ~55vh so the three stack with internal scroll.
+      // Desktop: keeps the 3-3-6 layout.
+      wide ? 'col-span-12 lg:col-span-6' : 'col-span-12 lg:col-span-3',
+      'max-h-[55vh] lg:max-h-none',
+    )}>
       <header className="px-4 py-3 border-b border-rule bg-paper-2 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="eyebrow text-[10.5px]">{title}</span>

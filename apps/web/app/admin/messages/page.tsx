@@ -74,7 +74,7 @@ export default function AdminMessagesPage() {
     submissions?.filter((s) => !s.handled).length ?? 0;
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col lg:h-screen">
       <PageHeader
         numeral="§"
         title="Messages"
@@ -103,7 +103,7 @@ export default function AdminMessagesPage() {
         }
       />
 
-      <div className="border-b border-rule px-8 py-3 flex items-center justify-between flex-wrap gap-3">
+      <div className="border-b border-rule px-4 sm:px-6 md:px-8 py-3 flex items-center justify-between flex-wrap gap-3">
         <div className="flex flex-wrap gap-1.5">
           {(['all', 'unhandled', 'handled'] as const).map((f) => (
             <button
@@ -129,8 +129,8 @@ export default function AdminMessagesPage() {
       </div>
 
       <div className="grid grid-cols-12 flex-1 min-h-0">
-        {/* List */}
-        <aside className="col-span-12 lg:col-span-5 border-r border-rule overflow-y-auto bg-paper-2/40">
+        {/* List — stacks above detail on mobile */}
+        <aside className="col-span-12 lg:col-span-5 border-b lg:border-b-0 lg:border-r border-rule lg:overflow-y-auto bg-paper-2/40">
           {filtered === null ? (
             <div className="px-5 py-6 serif-italic text-mute">Loading…</div>
           ) : filtered.length === 0 ? (
@@ -192,7 +192,7 @@ export default function AdminMessagesPage() {
         </aside>
 
         {/* Detail */}
-        <main className="col-span-12 lg:col-span-7 overflow-y-auto">
+        <main className="col-span-12 lg:col-span-7 lg:overflow-y-auto">
           {!selected ? (
             <div className="h-full flex items-center justify-center">
               <p className="serif-italic text-mute">
@@ -202,7 +202,7 @@ export default function AdminMessagesPage() {
               </p>
             </div>
           ) : (
-            <div className="px-7 py-7 max-w-[820px]">
+            <div className="px-4 sm:px-6 md:px-7 py-5 md:py-7 max-w-[820px]">
               <div className="flex items-center justify-between gap-3 mb-5">
                 <span className="eyebrow">Message</span>
                 <button
@@ -221,7 +221,7 @@ export default function AdminMessagesPage() {
               </div>
 
               <h2
-                className="font-display text-[28px] text-ink leading-[1.1] tracking-[-0.012em]"
+                className="font-display text-[22px] md:text-[28px] text-ink leading-[1.1] tracking-[-0.012em]"
                 style={{ fontWeight: 450 }}
               >
                 {selected.firstName}
