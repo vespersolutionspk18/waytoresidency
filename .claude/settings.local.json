@@ -14,7 +14,9 @@
       "WebFetch(domain:medium.com)",
       "Bash(pdftotext -layout \"C:\\\\Code Projects\\\\passive\\\\waytoresidency\\\\docs\\\\HBLPay - Integration Guide V1.0.pdf\" -)",
       "PowerShell(python -c \"import pypdf; print\\(pypdf.__version__\\)\" 2>&1; python -c \"import PyPDF2; print\\(PyPDF2.__version__\\)\" 2>&1; python -c \"import pdfplumber; print\\(pdfplumber.__version__\\)\" 2>&1)",
-      "PowerShell($env:PYTHONIOENCODING='utf-8'; python -c \"from pypdf import PdfReader; r = PdfReader\\(r'C:\\\\Code Projects\\\\passive\\\\waytoresidency\\\\docs\\\\HBLPay - Integration Guide V1.0.pdf'\\); [print\\(f'\\\\n===== PAGE {i+1} =====\\\\n' + \\(r.pages[i].extract_text\\(\\) or ''\\)\\) for i in range\\(21, 31\\)]\")"
+      "PowerShell($env:PYTHONIOENCODING='utf-8'; python -c \"from pypdf import PdfReader; r = PdfReader\\(r'C:\\\\Code Projects\\\\passive\\\\waytoresidency\\\\docs\\\\HBLPay - Integration Guide V1.0.pdf'\\); [print\\(f'\\\\n===== PAGE {i+1} =====\\\\n' + \\(r.pages[i].extract_text\\(\\) or ''\\)\\) for i in range\\(21, 31\\)]\")",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs"
     ]
   }
 }
