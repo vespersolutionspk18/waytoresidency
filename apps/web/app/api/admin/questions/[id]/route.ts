@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { asc, eq } from 'drizzle-orm';
 import { db } from '@/lib/db';
-import { choice, question, subject } from '@/lib/db/schema';
+import { attemptQuestion, choice, question, subject } from '@/lib/db/schema';
 import { requireAdmin } from '@/lib/auth-helpers';
 import { handle, json, error, readJson } from '@/lib/api-helpers';
 
@@ -156,7 +156,17 @@ export async function DELETE(
   return handle(async () => {
     await requireAdmin(request);
     const { id } = await params;
-    await db.delete(question).where(eq(question.id, id));
+
+    // attempt_question.questionId has onDelete: 'restrict' in the schema, so
+    // a question that's been used in any attempt can't be deleted directly —
+    // Postgres throws a FK constraint violation, which on a Vercel/Next
+    // serverless function surfaces as a crashed worker. Strip the attempt
+    // links first inside a transaction; choices cascade automatically.
+    await db.transaction(async (tx) => {
+      await tx.delete(attemptQuestion).where(eq(attemptQuestion.questionId, id));
+      await tx.delete(question).where(eq(question.id, id));
+    });
+
     return json({ ack: true });
   });
 }
