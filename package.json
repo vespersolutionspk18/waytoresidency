@@ -1,0 +1,22 @@
+{
+  "name": "waytoresidency",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @waytoresidency/web dev",
+    "build": "pnpm --filter @waytoresidency/web build",
+    "start": "pnpm --filter @waytoresidency/web start",
+    "lint": "pnpm --filter @waytoresidency/web lint",
+    "db:generate": "pnpm --filter @waytoresidency/web db:generate",
+    "db:migrate": "pnpm --filter @waytoresidency/web db:migrate",
+    "db:push": "pnpm --filter @waytoresidency/web db:push",
+    "db:studio": "pnpm --filter @waytoresidency/web db:studio",
+    "admin:seed": "pnpm --filter @waytoresidency/web admin:seed",
+    "admin:promote": "pnpm --filter @waytoresidency/web admin:promote",
+    "seed:questions": "pnpm --filter @waytoresidency/web seed:questions"
+  },
+  "packageManager": "pnpm@11.3.0",
+  "engines": {
+    "node": ">=20"
+  }
+}

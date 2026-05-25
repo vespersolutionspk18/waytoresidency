@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Test-Path *)",
+      "PowerShell(Get-Content *)",
+      "WebSearch",
+      "WebFetch(domain:orm.drizzle.team)",
+      "WebFetch(domain:better-auth.com)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Code Projects\\\\passive\\\\waytoresidency\" -Recurse -Filter \"proxy.md\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -First 5)",
+      "WebFetch(domain:www.chintristan.io)",
+      "WebFetch(domain:dev.to)",
+      "WebFetch(domain:makerkit.dev)",
+      "WebFetch(domain:medium.com)",
+      "Bash(pdftotext -layout \"C:\\\\Code Projects\\\\passive\\\\waytoresidency\\\\docs\\\\HBLPay - Integration Guide V1.0.pdf\" -)",
+      "PowerShell(python -c \"import pypdf; print\\(pypdf.__version__\\)\" 2>&1; python -c \"import PyPDF2; print\\(PyPDF2.__version__\\)\" 2>&1; python -c \"import pdfplumber; print\\(pdfplumber.__version__\\)\" 2>&1)",
+      "PowerShell($env:PYTHONIOENCODING='utf-8'; python -c \"from pypdf import PdfReader; r = PdfReader\\(r'C:\\\\Code Projects\\\\passive\\\\waytoresidency\\\\docs\\\\HBLPay - Integration Guide V1.0.pdf'\\); [print\\(f'\\\\n===== PAGE {i+1} =====\\\\n' + \\(r.pages[i].extract_text\\(\\) or ''\\)\\) for i in range\\(21, 31\\)]\")"
+    ]
+  }
+}
