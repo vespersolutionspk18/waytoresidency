@@ -2,7 +2,9 @@ packages:
   - 'apps/web'
   - 'packages/*'
 
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
-  - unrs-resolver
+# pnpm 11 renamed onlyBuiltDependencies → allowBuilds (map syntax).
+# These packages have native binaries that need their postinstall to run.
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
